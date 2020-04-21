@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Congratulations!!</title>
+
+
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+
+      <style>
+      @import url(https://fonts.googleapis.com/css?family=Sigmar+One);
+      html,
+      body {
+        overflow: hidden;
+      }
+      body {
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .congrats {
+        position: absolute;
+        top: 140px;
+        width: 550px;
+        height: 100px;
+        padding: 20px 10px;
+        color: white;
+        text-align: center;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+      }
+      h1 {
+        transform-origin: 50% 50%;
+        font-size: 50px;
+        font-family: 'Sigmar One', cursive;
+        cursor: pointer;
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        width: 100%;
+      }
+      h2 {
+        transform-origin: 50% 50%;
+        font-size: 30px;
+        font-family: 'Sigmar One', cursive;
+        cursor: pointer;
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        width: 100%;
+      }
+
+      .blob {
+        height: 50px;
+        width: 50px;
+        color: #ffcc00;
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        z-index: 1;
+        font-size: 30px;
+        display: none;
+      }
+</style>
+
+
+
+</head>
+
+<body>
+
+  <canvas id="canvas"></canvas>
+<div class="congrats">
+	<h1>Congratulations!
+	<br><font size="6">You Won !!!</font><br>
+<font size="3">Winner will be announced soon.<br>Check <a href=http://itrix.in>Official website</a> for updates</font></h1>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
+
+
+
+    <script>
+    // Click "Congratulations!" to play animation
+
+    $(function() {
+    	var numberOfStars = 20;
+
+    	for (var i = 0; i < numberOfStars; i++) {
+    	  $('.congrats').append('<div class="blob fa fa-star ' + i + '"></div>');
+    	}
+
+    	animateText();
+
+    	animateBlobs();
+    });
+
+    $('.congrats').hover(function() {
+    	reset();
+
+    	animateText();
+
+    	animateBlobs();
+    });
+
+    function reset() {
+    	$.each($('.blob'), function(i) {
+    		TweenMax.set($(this), { x: 0, y: 0, opacity: 1 });
+    	});
+
+    	TweenMax.set($('h1'), { scale: 1, opacity: 1, rotation: 0 });
+    }
+
+    function animateText() {
+    		TweenMax.from($('h1'), 0.8, {
+    		scale: 0.4,
+    		opacity: 0,
+    		rotation: 15,
+    		ease: Back.easeOut.config(4),
+    	});
+    }
+
+    function animateBlobs() {
+
+    	var xSeed = _.random(350, 380);
+    	var ySeed = _.random(120, 170);
+
+    	$.each($('.blob'), function(i) {
+    		var $blob = $(this);
+    		var speed = _.random(1, 5);
+    		var rotation = _.random(5, 100);
+    		var scale = _.random(0.8, 1.5);
+    		var x = _.random(-xSeed, xSeed);
+    		var y = _.random(-ySeed, ySeed);
+
+    		TweenMax.to($blob, speed, {
+    			x: x,
+    			y: y,
+    			ease: Power1.easeOut,
+    			opacity: 0,
+    			rotation: rotation,
+    			scale: scale,
+    			onStartParams: [$blob],
+    			onStart: function($element) {
+    				$element.css('display', 'block');
+    			},
+    			onCompleteParams: [$blob],
+    			onComplete: function($element) {
+    				$element.css('display', 'none');
+    			}
+    		});
+    	});
+    }
+
+    const SPEED = 10;
+
+    // canvas setup
+    const canvas = document.getElementById('canvas');
+    const dpr = window.devicePixelRatio || 1;
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + 'px';
+    canvas.style.height = window.innerHeight + 'px';
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+    });
+
+    let mousePos = {
+        x: canvas.width / 2,
+        y: canvas.height / 2,
+    };
+
+    window.addEventListener('mousemove', (e) => {
+        mousePos = {
+            x: e.clientX * dpr,
+            y: e.clientY * dpr,
+        };
+    });
+
+    let WARP;
+    window.addEventListener('mousedown', () => {
+        WARP = 4;
+    });
+
+    window.addEventListener('mouseup', () => {
+        WARP = false;
+    });
+
+    class Confetti {
+        constructor(x, y, ctx) {
+            const dpr = window.devicePixelRatio || 1;
+            this.x = x * dpr;
+            this.y = y * dpr;
+
+            this.vx = scaleBetween(x, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, 0, canvas.width / 2);
+            this.vy = scaleBetween(y, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, 0, canvas.height / 2);
+
+            this.ctx = ctx;
+
+            // confetti parameters
+            this.r = 0.1;
+            this.d = 10 * dpr;
+            this.ratio = this.r < this.d ? this.r / this.d : this.d / this.r;
+
+            this.colors = ['#b8b74d', '#5658fc', '#56c8fc', '#eecee6', '#a8d99c', '#f0261d', '#92a0fd', '#f8c265', '#df642f', '#d5a446'];
+            this.color = this.colors[Math.floor(this.colors.length * Math.random())];
+
+            this.angle = 4 * dpr;
+            this.tilt = Math.random();
+            this.tiltAngle = Math.random();
+            this.tiltAngleIncremental = 0.05 * Math.random();
+        }
+
+        drawConfetti() {
+            this.ctx.beginPath();
+            this.ctx.lineWidth = this.d / 2;
+            this.ctx.strokeStyle = this.color;
+            this.ctx.moveTo(this.x + this.tilt + this.r, this.y);
+            this.ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.r);
+            this.ctx.stroke();
+
+            this.updateConfettiParticle();
+        }
+
+        updateConfettiParticle() {
+            this.vx = scaleBetween(this.x, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, mousePos.x - canvas.width, mousePos.x + canvas.width);
+            this.vy = scaleBetween(this.y, WARP ? -WARP * dpr : -SPEED * dpr, WARP ? WARP * dpr : SPEED * dpr, mousePos.y - canvas.height, mousePos.y + canvas.width);
+
+            const tiltAngle = 0.01 * this.d;
+            this.r = this.r > 20 ? this.r : this.r + 0.1; // max 10
+
+            this.angle += 0.1;
+            this.tiltAngle += tiltAngle;
+            this.tiltAngle += this.tiltAngleIncremental;
+            this.tilt = (Math.sin(this.tiltAngle - (this.r / 2))) * this.r * 2;
+            this.y += Math.sin(this.angle + this.r / 2) * 2;
+            this.x += Math.sin(this.angle) / 2;
+            this.x += this.vx;
+            this.y += this.vy;
+        }
+    }
+
+    const confettis = [];
+
+    for (let i = 0; i < 200; i++) {
+        addConfettiParticle();
+    }
+
+    function addConfettiParticle() {
+        const x = window.innerWidth * Math.random();
+        const y = window.innerHeight * Math.random();
+        const c = new Confetti(x, y, ctx);
+        confettis.push(c);
+    }
+
+    function draw() {
+        const offset = 100;
+        ctx.globalCompositeOperation = WARP ? 'lighten' : 'source-over';
+        const gradient = ctx.createRadialGradient(mousePos.x, mousePos.y, canvas.width, mousePos.x, mousePos.y, 0);
+
+        gradient.addColorStop(0, '#010121');
+        gradient.addColorStop(1, '#321234');
+        ctx.fillStyle = gradient;
+
+        WARP ? null : ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        confettis.forEach((confetti, i) => {
+            confetti.drawConfetti();
+            if (confetti.x < -offset ||
+                confetti.y < -offset ||
+                confetti.x > canvas.width + offset ||
+                confetti.y > canvas.height + offset) {
+                confetti.dead = true;
+            }
+        });
+
+        confettis.forEach((confetti, i) => {
+            if (confetti.dead) {
+                confettis.splice(i, 1);
+                addConfettiParticle();
+            }
+        });
+
+        window.requestAnimationFrame(draw);
+    }
+
+    function scaleBetween(unscaledNum, minAllowed, maxAllowed, min, max){
+        return (maxAllowed - minAllowed) * (unscaledNum - min) / (max - min) + minAllowed;
+    }
+
+    draw();
+
+    </script>
+
+
+
+
+</body>
+
+</html>

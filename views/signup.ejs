@@ -1,0 +1,324 @@
+<html>
+<head>
+  <title>Itrix'18 Infinity_war</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <script src="image-picker.js"></script>
+  <link rel="stylesheet" type="text/css" href="image-picker.css">
+	<style>
+body
+{
+  background-image: url("indexbg.jpg");
+  background-position: fixed;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-size: 100% 100%;
+}
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+.inputs 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:100%;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+.inputs:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:10px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+.inputs:focus ~ label, .inputs:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#ffffff;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block;}
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+.inputs:focus ~ .bar:before, .inputs:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+.inputs:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
+@font-face {
+    font-family: avengeanceregular;
+    src: url('css/fonts/avengeance-webfont.woff2') format('woff2'),
+    	 url('css/fonts/AVENGEANCE.otf') format('opentype'),
+         url('css/fonts/avengeance-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.container
+{	 border-radius: 25px;
+   border: 2px solid black;
+   background-color: rgba(0,0,0,0.7);
+    
+}
+.fonts
+{	
+	font-family: avengeanceregular;
+}
+.center
+{	text-align: center;
+}
+.alert
+{  color: red;
+}
+input {
+    font-family: "Times New Roman", Times, serif;
+}
+.navba {
+    padding: 0px;
+    padding-top: 0px;
+  }
+  .navba>img {
+    height: 100%;
+}
+
+.example3 .navba{
+    padding-top: 0px;
+    margin: 0px;
+    padding: 0px;
+    height: 80px;
+  }
+  .navbody h1 {
+  text-align: center;
+  font-size: 3.5em;
+  margin: 20px 0 20px 0;
+}
+
+.navbody h1 {
+  text-decoration: none;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.navbody h1 {
+  font-family: avengeanceregular;
+  color: #00008B;
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 1.5s ease-in-out infinite alternate;
+}
+
+.navbody h1:hover {
+  color: #00008B;
+  -webkit-animation: none;
+  -moz-animation: none;
+  animation: none;
+}
+
+
+
+@-webkit-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #0099CC, 0 0 20px #0099CC, 0 0 30px #0099CC, 0 0 40px #228dff, 0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
+  }
+  to {
+    text-shadow: 0 0 5px #0099CC, 0 0 10px #0099CC, 0 0 15px #0099CC, 0 0 20px #228dff, 0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
+  }
+}
+
+
+
+@-moz-keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #0099CC, 0 0 20px #0099CC, 0 0 30px #0099CC, 0 0 40px #228dff, 0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
+  }
+  to {
+    text-shadow: 0 0 5px #0099CC, 0 0 10px #0099CC, 0 0 15px #0099CC, 0 0 20px #228dff, 0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
+  }
+}
+
+
+@keyframes neon1 {
+  from {
+    text-shadow: 0 0 10px #0099CC, 0 0 20px #0099CC, 0 0 30px #0099CC, 0 0 40px #228dff, 0 0 70px #228dff, 0 0 80px #228dff, 0 0 100px #228dff, 0 0 150px #228dff;
+  }
+  to {
+    text-shadow: 0 0 5px #0099CC, 0 0 10px #0099CC, 0 0 15px #0099CC, 0 0 20px #228dff, 0 0 35px #228dff, 0 0 40px #228dff, 0 0 50px #228dff, 0 0 75px #228dff;
+  }
+}
+navbody {
+  color: #0099CC;
+ font-family: avengeanceregular;
+  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+  animation: neon1 1.5s ease-in-out infinite alternate;
+}
+
+navbody .h1:hover {
+  color: #FF1177;
+  -webkit-animation: none;
+  -moz-animation: none;
+  animation: none;
+}
+
+</style>
+
+
+</head>
+
+<div class="example3">
+  <div class="navba">
+<img src="itrix.png" alt="Itrix 18" align="left">
+
+</div>
+
+        </div>
+   <div class="navbody">
+   <span class="heading"><center><h1>INFINITY WAR</h1></center></span>
+     </div>
+
+</style>
+
+
+</head>
+
+<body>
+	<div class="h-100 align-items-center">
+    <br><br>
+		<div class="fonts container col-md-4 col-xs-10 col-sm-8">
+  <br>
+  <h2 class="center"><font color="white">Sign up</font><br></h2><br>	
+  <span class="alert"><%= message %></span><br><br>
+ <form action="http://127.0.0.1:9000/signupdone" method=post>
+    
+    <div class="group">      
+      <input type="email" name="email" class="inputs" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Email</label>
+    </div>
+    
+    <div class="group">      
+      <input type="text" name="name" class="inputs" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Name</label>
+    </div>
+      
+    <div class="group">      
+      <input type="Password" name="pass" class="inputs" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Password</label>
+    </div>
+
+    <div class="group">      
+      <input type="tel" name="phone" class="inputs" maxlength=10 minlength=10 required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Phone</label>
+    </div>
+    
+    <div class="group">      
+      <input type="text" name="college" class="inputs" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>College</label>
+    </div>
+    
+    <div class="group">      
+      <input type="number" name="year" class="inputs" min="1" max="5" maxlength="1" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Year</label>
+    </div>
+    
+    <div class="group">      
+      <input type="text" name="department" class="inputs" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Department</label>
+    </div>
+
+
+    <div class="group">      
+    <label><font color="white">Choose your avatar:</font></label><br><br>
+  <select class="image-picker show-labels show-html" name="avatarr">
+  <option data-img-label="Awww" data-img-src="femaleg.jpg" value="female">Natasha</option>
+  <option data-img-label="Ohai" data-img-src="maleg.jpg" value="male">Captain</option>
+</select>
+</div>
+<script type="text/javascript">$("select").imagepicker()</script>
+    <input type="submit" value="Sign up" class="btn btn-primary btn-block">
+  </form> 
+     
+  <br><br>
+</div>
+</div>
+<br><br>
+</body>
+</html>

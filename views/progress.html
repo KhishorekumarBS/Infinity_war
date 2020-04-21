@@ -1,0 +1,160 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<style>
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+		     box-sizing: border-box;
+}
+.center {
+  color: #d6d6d6;
+	text-align: center;
+	margin-top: 50px;
+}
+.buttons {
+	display: block;
+	width: 100%;
+	margin-top: 65px;
+	text-align: center;
+}
+.buttons a {
+	text-decoration: none;
+	background-color: gray;	
+	padding: 8px 25px;
+	color: #ffffff;
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;
+}
+.buttons a:hover {
+	background-color: #cfcfcf;
+}
+a.next {
+	margin-left: 25px;
+}
+a.prev {
+	margin-right: 25px;
+}
+/* =================== */
+/* PROGRESS BAR STYLES */
+/* =================== */
+.progress {
+	width: 100%;
+	max-width: 1600px;
+	margin: 30px auto 0;
+	display: table;
+	position: relative;
+	text-align: center;
+	left: 4%;
+}
+.progress ul {  
+	display: table-row;
+}
+.progress ul li {
+	background-color: #d6d6d6; /* Default Bar Color */
+	display: table-cell;
+	position: relative;
+	line-height: 20px;
+	z-index: -3;
+	color: #FFF;
+	text-align: left;	
+}
+.progress ul li::before {
+	content:'';
+	width: 40px;
+	height: 40px;
+	color: #FFF;
+	line-height: 30px;
+	text-align: center;
+	left: -15px;
+	background-color: #d6d6d6;/* Default Circle Color */
+	border: solid 5px #d6d6d6;/* Default Circle Color */
+	z-index: 9;
+	position: absolute;
+	display: block;
+	top: -10px;	
+	margin-right: auto;
+	margin-left: auto;
+	z-index: -1;
+	
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	
+	-webkit-border-radius: 50%;
+	   -moz-border-radius: 50%;
+	        border-radius: 50%;
+}
+/* CURRENT STEP */
+.progress ul li.current {
+	display: inline-block;
+	width: 100%;
+	z-index: -3;
+	color: #0e90d2;
+	position: relative;
+}
+.progress ul li.current::before {
+	border: solid 5px #0e90d2;/* Current Step Circle Color */
+	background-color: #FFF;
+}
+/* COMPLETED STEPS */
+.progress ul li.complete {
+	background-color: #0e90d2; /* Completed Step Bar Color */
+}
+.progress ul li.complete::before {
+	background-color: #0e90d2; /* Completed Step Circle Color */
+	border: 5px solid transparent;
+}
+/* REMOVE FIRST STEP COLOR BAR LINE */
+.progress ul li:last-of-type {
+	background-color: transparent;
+}
+.progress ul li.current:last-of-type,
+.progress ul li.complete:last-of-type  {
+	background-color: transparent;
+}
+</style>
+
+<body>
+<div class="progress">
+  <ul>
+    <li class="current">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+  </ul>
+</div>
+<div class="buttons">
+	<a href="#" id="prev">&#10094; prev</a>
+	<a href="#" id="next">next &#10095;</a>	
+</div>
+<script>
+	for(var i=1;i<4;i++)
+	{
+	 $(document).ready(function () {
+       var $next = $('.progress ul li.current').removeClass('current').addClass('complete').next('li');
+          $next.removeClass('complete').addClass('current');
+           //console.log('Prev');
+   });
+	}
+</script>
+</body>
+</html>

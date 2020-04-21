@@ -1,0 +1,604 @@
+<html>
+ <head>
+   <!-- facebook plugin -->
+  <meta property="fb:app_id" content="133659213968748" />
+  <meta propert="og:site_name" content="http://127.0.0.1:9000/authenticate" />
+  <meta property="og:url" content="http://127.0.0.1:9000/authenticate" />
+  <meta property="og:title" content="Node Authentication" />
+  <meta property="og:type" content="Website" />
+  <meta property="og:description" content="Add Some description" />
+  <meta property="og:image" content="pro.jpg" />
+  <!--end of plugin-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="style.css">
+
+
+
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+<script>
+   $(document).ready(function() {
+  $('.button').on('click', function() {
+    $('.content').toggleClass('isOpen');
+  });
+});
+</script>
+	<style>
+    @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+    .button:before {
+  content: '\f0c9';
+  font: 42px fontawesome;
+}
+
+  /* anchor as button */
+   .linkbut:link, .linkbut:visited {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+
+.linkbut:hover, .linkbut:active {
+    background-color: red;
+}
+
+.popup {
+    width:100%;
+    height:100%;
+    display:none;
+    position:fixed;
+    top:0px;
+    left:0px;
+    background:rgba(0,0,0,0.75);
+}
+
+/* Inner */
+.popup-inner {
+    padding:40px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    box-shadow:0px 2px 6px rgba(0,0,0,1);
+    border-radius:3px;
+    background:#fff;
+    text-align: center;
+}
+
+/* Close Button */
+.popup-close {
+    width:30px;
+    height:30px;
+    padding-top:4px;
+    display:inline-block;
+    position:absolute;
+    top:0px;
+    right:0px;
+    transition:ease 0.25s all;
+    -webkit-transform:translate(50%, -50%);
+    transform:translate(50%, -50%);
+    border-radius:1000px;
+    background:rgba(0,0,0,0.8);
+    font-family:Arial, Sans-Serif;
+    font-size:20px;
+    text-align:center;
+    line-height:100%;
+    color:#fff;
+}
+
+.popup-close:hover {
+    -webkit-transform:translate(50%, -50%) rotate(180deg);
+    transform:translate(50%, -50%) rotate(180deg);
+    background:rgba(0,0,0,1);
+    text-decoration:none;
+}
+/*progress bar */
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+         box-sizing: border-box;
+}
+.center {
+  color: #d6d6d6;
+  text-align: center;
+  margin-top: 50px;
+}
+.buttons {
+  display: block;
+  width: 100%;
+  margin-top: 65px;
+  text-align: center;
+}
+.buttons a {
+  text-decoration: none;
+  background-color: gray;
+  padding: 8px 25px;
+  color: #ffffff;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+.buttons a:hover {
+  background-color: #cfcfcf;
+}
+a.next {
+  margin-left: 25px;
+}
+a.prev {
+  margin-right: 25px;
+}
+/* =================== */
+/* progres BAR STYLES */
+/* =================== */
+.progres {
+  width: 100%;
+  max-width: 1000px;
+  display: table;
+  position: relative;
+  text-align: center;
+}
+.progres ul {
+  display: table-row;
+}
+.progres ul li {
+  background-color: #d6d6d6; /* Default Bar Color */
+  display: table-cell;
+  position: relative;
+  line-height: 20px;
+  z-index: -3;
+  color: #FFF;
+  text-align: left;
+}
+.progres ul li::before {
+  content:'';
+  width: 40px;
+  height: 40px;
+  color: #FFF;
+  line-height: 30px;
+  text-align: center;
+  left: -15px;
+  background-color: #d6d6d6;/* Default Circle Color */
+  border: solid 5px #d6d6d6;/* Default Circle Color */
+  index: -9;
+  position: absolute;
+  display: block;
+  top: -10px;
+  margin-right: auto;
+  margin-left: auto;
+  z-index: -1;
+
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+
+  -webkit-border-radius: 50%;
+     -moz-border-radius: 50%;
+          border-radius: 50%;
+}
+/* CURRENT STEP */
+.progres ul li.current {
+  display: inline-block;
+  width: 100%;
+  z-index: -3;
+  color: #0e90d2;
+  position: relative;
+}
+.progres ul li.current::before {
+  border: solid 5px #0e90d2;/* Current Step Circle Color */
+  background-color: #FFF;
+}
+/* COMPLETED STEPS */
+.progres ul li.complete {
+  background-color: #0e90d2; /* Completed Step Bar Color */
+}
+.progres ul li.complete::before {
+  background-color: #0e90d2; /* Completed Step Circle Color */
+  border: 5px solid transparent;
+}
+/* REMOVE FIRST STEP COLOR BAR LINE */
+.progres ul li:last-of-type {
+  background-color: transparent;
+}
+.progres ul li.current:last-of-type,
+.progres ul li.complete:last-of-type  {
+  background-color: transparent;
+}
+.dialogdemoBasicUsage #popupContainer {
+  position: relative; }
+
+.dialogdemoBasicUsage .footer {
+  width: 100%;
+  text-align: center;
+  margin-left: 20px; }
+
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+.dialogdemoBasicUsage button {
+  width: 200px; }
+
+.dialogdemoBasicUsage div#status {
+  color: #c60008; }
+
+.dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
+  margin-bottom: 0; }
+
+</style>
+
+   </head>
+
+<body>
+   <div class='wrapper'>
+  <div class='sidebar'>
+    <div class='title'>
+      <%= name %><br><%= level %><br>
+      <img src="hulk icon.jpg" class="img-circle" alt="player icon" width="94" height="110"><br><br>
+    </div>
+    <ul class='nav'>
+      <li>
+        <a id="dashboard">Dashboard</a>
+      </li>
+      <li>
+        <a id="leaderboard">Leaderboard</a>
+      </li>
+      <li>
+        <a id="panel">Discussion panel</a>
+      </li>
+      <li>
+        <a id="rules">Rules</a>
+      </li>
+      <li>
+        <a id="storyline">Storyline</a>
+      </li>
+      <li>
+        <a href="http://127.0.0.1:9000/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+   <div class='content' id="bgimg">
+   <a class='button'></a>
+   <div class="container">
+   <div class="progres">
+  <ul>
+    <li class="current">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+    <li>10</li>
+    <li>11</li>
+    <li>12</li>
+    <li>13</li>
+    <li>14</li>
+    <li>15</li>
+  </ul>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="dashdiv">
+    <img id="questionimg" class="img-fluid" src="" >
+  <form>
+    <input type="text" id="answerbox">
+  </form>
+    <a class="btn linkbut" data-popup-open="popup-1" href="#" id="submitbtn">Submit</a>
+    <div id="leadertable">
+    <table border=1 id="mytable">
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+    </table>
+    <div>
+    <div class="popup" data-popup="popup-1">
+    <div class="popup-inner">
+      <div id="stage1">
+        <div id="innerstage">
+        <h2>Success !!!!</h2>
+        <img id="successimage" src="">
+        <p>You're correct</p>
+        <button id="nextbtn">Next</button>
+        </div>
+        <div id="innerstage2"></div>
+      </div>
+        <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+    </div>
+</div>
+</div>
+
+<div class="rulesdiv">
+  <h1>rules</h1>
+</div>
+
+<div class="storylinediv">
+  Storyline
+</div>
+<!---------paneldiv start-------->
+<div class="paneldiv">
+<br>
+  <b>Discussion panel </b><br>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="div1">
+  level1
+<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator#comment1"
+data-width="600" data-numposts="4" id="div1" xid="1111"></div>
+</div>
+
+<div id="div2">
+  level2
+<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator#comment2"
+data-width="600" data-numposts="4" id="div2" xid="2222"></div>
+</div>
+
+<div id="div3">
+  level3
+<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator#comment3"
+data-width="600" data-numposts="4" id="div3" xid="3333"></div>
+</div>
+
+</div>
+<!----------end paneldiv---------->
+
+
+<div class="leaderboarddiv">
+  <form>
+    <input type="hidden">
+  </form>
+  <div id="leadertable">
+  <table border=1 id="mytable">
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+    </tr>
+  </table>
+  <div>
+</div>
+
+
+</div>
+</div>
+<script type = "text/javascript" language = "javascript">
+  var prlevel;
+   $(function() {
+    //----- OPEN
+    $('[data-popup-open]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+        e.preventDefault();
+    });
+
+    //----- CLOSE
+    $('[data-popup-close]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+        e.preventDefault();
+    });
+});
+$(document).ready(function(){
+        $(".dashdiv").show();
+        $(".rulesdiv").hide();
+        $(".storylinediv").hide();
+        $(".storylinediv").hide();
+        $(".leaderboarddiv").hide();
+        $(".paneldiv").hide();
+    });
+$(document).ready(function(){
+    $("#dashboard").click(function(){
+        $(".dashdiv").show();
+        $(".rulesdiv").hide();
+        $(".storylinediv").hide();
+        $(".leaderboarddiv").hide();
+        $(".paneldiv").hide();
+    });
+   $("#rules").click(function(){
+        $(".dashdiv").hide();
+        $(".rulesdiv").show();
+        $(".storylinediv").hide();
+        $(".leaderboarddiv").hide();
+        $(".paneldiv").hide();
+    });
+   $("#leaderboard").click(function(){
+        $(".dashdiv").hide();
+        $(".rulesdiv").hide();
+        $(".storylinediv").hide();
+        $(".leaderboarddiv").show();
+        $(".paneldiv").hide();
+    });
+   $("#storyline").click(function(){
+        $(".dashdiv").hide();
+        $(".rulesdiv").hide();
+        $(".storylinediv").show();
+        $(".leaderboarddiv").hide();
+        $(".paneldiv").hide();
+    });
+    $("#panel").click(function(){
+         $(".dashdiv").hide();
+         $(".rulesdiv").hide();
+         $(".storylinediv").hide();
+         $(".leaderboarddiv").hide();
+         $(".paneldiv").show();
+         $(document).ready(function(){
+           var leve =  <%= level %> ;
+           if(leve==1){
+             $("#div1").show();
+             $("#div2").hide();
+             $("#div3").hide();
+           }
+           else if(leve==2){
+             $("#div1").hide();
+             $("#div2").show();
+             $("#div3").hide();
+           }
+           else if(leve==3){
+             $("#div1").hide();
+             $("#div2").hide();
+             $("#div3").show();
+           }
+         });
+     });
+});
+$(document).ready(function(){
+    $.ajax({
+            type: "POST",
+            url: "/begin",
+            success: function(jd) {
+                     $("#successimage").attr("src",jd.successimg);
+                     $('#bgimg').css("background-image", "url(/"+jd.bgimg);
+                     prlevel=jd.level;
+                     progressbar();
+                },
+            error: function(jqXHR, textStatus, err) {
+                alert('text status '+textStatus+', err '+err)
+            }
+            });
+    $.ajax({
+                    type: "POST",
+                    url: "/leaderboard",
+                    success: function(docs) {
+                        $('#mytable tr').not(':first').not(':last').remove();
+                        var html = '';
+                        $.each(docs, function (i) {
+                            html += '<tr><td>' + eval(JSON.stringify(docs[i].name)) + '</td><td>' + eval(JSON.stringify(docs[i].score)) + '</td></tr>';
+                          });
+                        $('#mytable tr').first().after(html);
+                      },
+                    error: function(jqXHR, textStatus, err) {
+                       alert('text status '+textStatus+', err '+err)
+                      }
+                  });
+    });
+  $.get("/view", function(){
+        $("#questionimg").attr("src",'http://127.0.0.1:9000/view');
+    });
+
+         $(document).ready(function() {
+            $("#submitbtn").click(function(event){
+                    checker();
+            });
+       });
+
+
+         function checker()
+         {
+                  var txtbox = document.getElementById("answerbox");
+                  txtbox.value = txtbox.value.toLowerCase("txtbox");
+                  txtbox.value = txtbox.value.replace(/\s/g, "");
+            $.ajax({
+            type: "POST",
+            url: "/next",
+            data:{ answer: txtbox.value },
+            success: function(jd) {
+                  if(jd.auth==0)
+                  {  $("#innerstage").hide();
+                     $("#innerstage2").show();
+                     $('#innerstage2').html('<p>Incorrect Answer</p><img src="'+jd.img+'"><p>Try again</p>');
+                  }
+                  else
+                  { prlevel=2;
+                    progressbar();
+                    $("#successimage").attr("src",jd.successimg);
+                    $("#innerstage").show();
+                    $("#innerstage2").hide();
+                    $.get("/view", function(){
+                          $("#questionimg").attr("src",'http://127.0.0.1:9000/view');
+                    });
+                    $('#bgimg').css("background-image", "url(/"+jd.bgimg);
+                    $('#answerbox').val('');
+                    $("#nextbtn").click(function(){
+                      $("#innerstage").hide();
+                      $("#innerstage2").show();
+                    $('#innerstage2').html('<img src="'+jd.img+'"><br>');
+                     switch(jd.level)
+                     {
+                        case 2:$('#innerstage2').append('level 1 to 2');break;
+                        case 3:$('#innerstage2').append('level 2 to 3');break;
+                        case 4:$('#innerstage2').append('level 3 to 4');break;
+                        case 5:$('#innerstage2').append('level 4 to 5');break;
+                        case 6:$('#innerstage2').append('level 5 to 6');break;
+                        case 7:$('#innerstage2').append('level 6 to 7');break;
+                        case 8:$('#innerstage2').append('level 7 to 8');break;
+                        case 9:$('#innerstage2').append('level 8 to 9');break;
+                        case 10:$('#innerstage2').append('level 9 to 10');break;
+                        case 11:$('#innerstage2').append('level 10 to 11');break;
+                        case 12:$('#innerstage2').append('level 11 to 12');break;
+                        case 13:$('#innerstage2').append('level 12 to 13');break;
+                        case 14:$('#innerstage2').append('level 13 to 14');break;
+                        case 15:$('#innerstage2').append('level 14 to 15');break;
+                     }
+
+                    });
+                  }
+                  $.ajax({
+                    type: "POST",
+                    url: "/leaderboard",
+                    success: function(docs) {
+                        $('#mytable tr').not(':first').not(':last').remove();
+                        var html = '';
+                        $.each(docs, function (i) {
+                            html += '<tr><td>' + eval(JSON.stringify(docs[i].name)) + '</td><td>' + eval(JSON.stringify(docs[i].score)) + '</td></tr>';
+                          });
+                        $('#mytable tr').first().after(html);
+                      },
+                    error: function(jqXHR, textStatus, err) {
+                       alert('text status '+textStatus+', err '+err)
+                      }
+                  });
+              },
+            error: function(jqXHR, textStatus, err) {
+                //show error message
+                alert('text status '+textStatus+', err '+err)
+            }
+            });
+          }
+          /*$('#answerbox').keypress(function(event){
+
+              var keycode = (event.keyCode ? event.keyCode : event.which);
+              if(keycode == '13'){
+                checker();
+              }
+            });*/
+function progressbar()
+{
+for(var i=1;i<prlevel;i++)
+  {
+   $(document).ready(function () {
+       var $next = $('.progres ul li.current').removeClass('current').addClass('complete').next('li');
+          $next.removeClass('complete').addClass('current');
+           //console.log('Prev');
+   });
+  }
+}
+
+</script>
+</body>
+</html>
