@@ -11,7 +11,7 @@
     "express-session": "^1.15.6",
     "jwt-simple": "*",
     "mongoose": "~4.2.4",
-    "morgan": "~1.5.0",
+    "morgan": "~1.9.1",
     "nodemon": "^1.14.6",
     "passport": "^0.3.0",
     "passport-facebook": "~2.0.0",
