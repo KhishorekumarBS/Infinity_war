@@ -10,7 +10,7 @@
     "express": "~4.9.8",
     "express-session": "^1.15.6",
     "jwt-simple": "*",
-    "mongoose": "~4.2.4",
+    "mongoose": "~5.7.5",
     "morgan": "~1.5.0",
     "nodemon": "^1.14.6",
     "passport": "^0.3.0",
